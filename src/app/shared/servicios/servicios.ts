@@ -43,4 +43,10 @@ serviciosFiltrados = this.servicios;
     this.servicioSeleccionado= nombre; 
   }
 
+  busqueda(event : Event){
+    const valor = (event.target as HTMLInputElement).value;
+    this.subtitulo=`Resultado para: ${valor}`;
+    this.serviciosFiltrados = this.servicios.filter(s=>s.nombre.toLowerCase().includes(valor.toLowerCase()))
+  }
+
 }
