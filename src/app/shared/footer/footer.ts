@@ -8,9 +8,12 @@ import { RouterLink } from "@angular/router";
   styleUrl: './footer.css',
 })
 export class Footer {
+
+  year: number = new Date().getFullYear();
+
   enlaces= [
     {texto: 'Home', link: ''},
-    {texto: 'Nosotros', link: '#'},
+    {texto: 'Consultas', link: '#'},
     {texto: 'Servicios', link: '#'},
     {texto: 'Mascotas', link: '#'},
     {texto: 'Contacto', link: '#'},
