@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { Mascota } from '../../models/mascota';
 import { PanelPacientes } from "../../shared/panel-pacientes/panel-pacientes";
 import { DetalleConsultas } from "../../shared/detalle-consultas/detalle-consultas";
+import { HeroHome } from "../../shared/hero-home/hero-home";
 
 @Component({
   selector: 'app-consultas-page',
-  imports: [PanelPacientes, DetalleConsultas],
+  imports: [PanelPacientes, DetalleConsultas, HeroHome],
   templateUrl: './consultas-page.html',
   styleUrl: './consultas-page.css',
 })
