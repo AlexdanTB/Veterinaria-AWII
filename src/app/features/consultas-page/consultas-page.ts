@@ -3,10 +3,11 @@ import { Mascota } from '../../models/mascota';
 import { PanelPacientes } from "../../shared/panel-pacientes/panel-pacientes";
 import { DetalleConsultas } from "../../shared/detalle-consultas/detalle-consultas";
 import { HeroHome } from "../../shared/hero-home/hero-home";
+import { Faq } from "../../shared/faq/faq";
 
 @Component({
   selector: 'app-consultas-page',
-  imports: [PanelPacientes, DetalleConsultas, HeroHome],
+  imports: [PanelPacientes, DetalleConsultas, HeroHome, Faq],
   templateUrl: './consultas-page.html',
   styleUrl: './consultas-page.css',
 })
