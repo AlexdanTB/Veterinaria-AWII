@@ -4,3 +4,7 @@ export interface Pet {
     description: string,
     imageURL: string;
 }
+
+export interface RespuestaApi{
+    data: Pet[];
+}
