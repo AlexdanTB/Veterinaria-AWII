@@ -11,7 +11,7 @@
                 class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
 
             <input [(ngModel)]="nuevoUsuario.email" name="email" type="email" placeholder="Correo" required
-                class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+                class="w-full px-4 py-2 rounded-lg border border-slxate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
 
             <input [(ngModel)]="nuevoUsuario.phone" name="phone" type="text" placeholder="Teléfono" required
                 class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
@@ -20,7 +20,7 @@
                 class="md:col-span-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-colors shadow-lg shadow-indigo-200">
                 {{editando ? 'Actualizar Registro': 'Guardar Registro'}}
             </button>
-        </form>
+        </form> 
     </div>
 
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
@@ -37,7 +37,7 @@
             <tbody>
                 @for (usuario of listaUsuarios(); track usuario.name) {
                 <tr class="border-b border-slate-100 hover:bg-indigo-50 transition-colors">
-                    <td class="p-4 text-slate-600">
+                    <td class="p-4 gap-4 text-slate-600">
                         <button (click)="eliminarUsuario(usuario.id!)">❌</button>
                         <button (click)="seleccionarParaEditar(usuario)">✏️</button>
                     </td>
