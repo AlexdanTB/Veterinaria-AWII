@@ -19,12 +19,12 @@ export class Login {
   private router = inject(Router)
 
   iniciarSesion(){
-    if(this.email! && this.password!){
-      
+    if(!this.email || !this.password){
+      alert('Campos inválidos')
+      return;
     }
     this.servicioAuth.login(this.email, this.password);
-    alert('Bienvenido al sistema');
-    this.router.navigate(['usuarios'])  
+    
     
   }
 
