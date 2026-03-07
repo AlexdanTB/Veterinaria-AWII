@@ -12,18 +12,29 @@ import { Router } from '@angular/router';
 })
 export class Login {
 
-  email: string = ''
-  password: string = ''
+  email: string = '';
+  password: string = '';
+
 
   private servicioAuth = inject(AuthService);
   private router = inject(Router)
 
   iniciarSesion(){
+    this.servicioAuth.login(this.email, this.password).subscribe(success =>{
+      if(success){
+        alert('Bienvenido al sistema')
+        this.router.navigate(['/usuarios']);
+      }
+    });
+    /*
     if(!this.email || !this.password){
       alert('Campos inválidos')
       return;
     }
-    this.servicioAuth.login(this.email, this.password);
+    this.servicioAuth.login(this.email, this.password);*/
+  }
+  cerrarSesion(){
+    this.servicioAuth.logout();
   }
 
 }
