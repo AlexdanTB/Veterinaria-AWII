@@ -24,8 +24,6 @@ export class Login {
       return;
     }
     this.servicioAuth.login(this.email, this.password);
-    
-    
   }
 
 }
