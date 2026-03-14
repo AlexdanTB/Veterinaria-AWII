@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Formulario } from "../../shared/formulario/formulario";
+import { HizoCambios } from '../../guards/deactivate-guard';
 
 @Component({
   selector: 'app-usuarios',
@@ -7,6 +8,12 @@ import { Formulario } from "../../shared/formulario/formulario";
   templateUrl: './usuarios.html',
   styleUrl: './usuarios.css',
 })
-export class Usuarios {
+export class Usuarios implements HizoCambios {
+
+  @ViewChild(Formulario) formulario!: Formulario;
+
+  hizoCambios(): boolean {
+    return this.formulario ? this.formulario.hizoCambios() : false;
+  }
 
 }

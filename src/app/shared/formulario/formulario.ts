@@ -4,6 +4,7 @@ import { Usuario } from '../../models/usuario';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth-service';
+import { HizoCambios } from '../../guards/deactivate-guard';
 
 @Component({
   selector: 'app-formulario',
@@ -11,7 +12,7 @@ import { AuthService } from '../../services/auth-service';
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })
-export class Formulario {
+export class Formulario implements HizoCambios{
 
   public servicioUsuario = inject(UsuarioService);
   public servicioAuth = inject(AuthService)
@@ -29,6 +30,8 @@ export class Formulario {
   }
 
   editando: boolean = false;
+
+  usuarioOriginal: Usuario | null = null;
 
   ngOnInit(){
     this.obtenerUsuarios();
@@ -67,12 +70,13 @@ export class Formulario {
 
 
   seleccionarParaEditar(user: Usuario){
-    this.editando= true
+    this.editando= true;
     this.nuevoUsuario= {...user}
+    this.usuarioOriginal = {...user};
   }
 
   limpiarFormulario(){
-    this.editando= true
+    this.editando= false
     this.nuevoUsuario={
       name: '',
       email: '',
@@ -80,5 +84,16 @@ export class Formulario {
       password: '',
       rol: 'ROLE_VETERINARIO'
     }
+    this.usuarioOriginal = null;
+  }
+
+  hizoCambios(): boolean {
+    if (!this.editando && (this.nuevoUsuario.name || this.nuevoUsuario.email || this.nuevoUsuario.phone || this.nuevoUsuario.password)) {
+      return true;
+    }
+    if (this.editando && this.usuarioOriginal) {
+      return JSON.stringify(this.nuevoUsuario) !== JSON.stringify(this.usuarioOriginal);
+    }
+    return false;
   }
 }
