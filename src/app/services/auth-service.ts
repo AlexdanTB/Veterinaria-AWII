@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { getAuth, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 import { UsuarioService } from './usuario-service';
 import { map, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +17,16 @@ export class AuthService {
   private auth = getAuth();
 
   private servicioUsuario = inject(UsuarioService)
+  private http = inject(HttpClient);
+  private API_LOGIN= 'http://localhost:8080/login'
+
   sesionInciada = signal<boolean>(localStorage.getItem('sesion')==='true')
   rolActual = signal<string | null>(localStorage.getItem('rol'));
 
   login(email: string, password: string):Observable<boolean>{
-    return this.servicioUsuario.getUsuarios().pipe(
-      map(usuarios => {
-        const usuarioCoincide = usuarios.find(u=> u.email=== email && u.password === password);
-        if (usuarioCoincide){
+    return this.http.post<Usuario | null>(this.API_LOGIN, {email, password}).pipe(
+      map(usuarioCoincide => {
+        if (usuarioCoincide && usuarioCoincide.id){
           localStorage.setItem('sesion', 'true')
           localStorage.setItem('user', JSON.stringify(usuarioCoincide));
           localStorage.setItem('rol', usuarioCoincide.rol)
@@ -33,6 +37,7 @@ export class AuthService {
         return false;
       })
     )
+  
 
     //Metodo de dfirebase auth para
     //signInWithEmailAndPassword(this.auth, email, password)
